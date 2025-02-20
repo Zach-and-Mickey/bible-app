@@ -1,0 +1,332 @@
+{
+  "Genesis": {
+    "author": "Moses",
+    "chapters": 50,
+    "date_written": "1446-1406 BC"
+  },
+  "Exodus": {
+    "author": "Moses",
+    "chapters": 40,
+    "date_written": "1446-1406 BC"
+  },
+  "Leviticus": {
+    "author": "Moses",
+    "chapters": 27,
+    "date_written": "1445 BC"
+  },
+  "Numbers": {
+    "author": "Moses",
+    "chapters": 36,
+    "date_written": "1445-1405 BC"
+  },
+  "Deuteronomy": {
+    "author": "Moses",
+    "chapters": 34,
+    "date_written": "1405 BC"
+  },
+  "Joshua": {
+    "author": "Joshua",
+    "chapters": 24,
+    "date_written": "1400 BC"
+  },
+  "Judges": {
+    "author": "Samuel",
+    "chapters": 21,
+    "date_written": "1040-1000 BC"
+  },
+  "Ruth": {
+    "author": "Samuel",
+    "chapters": 4,
+    "date_written": "1040 BC"
+  },
+  "1 Samuel": {
+    "author": "Samuel, Nathan, Gad",
+    "chapters": 31,
+    "date_written": "1050-1010 BC"
+  },
+  "2 Samuel": {
+    "author": "Samuel, Nathan, Gad",
+    "chapters": 24,
+    "date_written": "1010-970 BC"
+  },
+  "1 Kings": {
+    "author": "Jeremiah",
+    "chapters": 22,
+    "date_written": "560 BC"
+  },
+  "2 Kings": {
+    "author": "Jeremiah",
+    "chapters": 25,
+    "date_written": "560 BC"
+  },
+  "1 Chronicles": {
+    "author": "Ezra",
+    "chapters": 29,
+    "date_written": "450 BC"
+  },
+  "2 Chronicles": {
+    "author": "Ezra",
+    "chapters": 36,
+    "date_written": "430 BC"
+  },
+  "Ezra": {
+    "author": "Ezra",
+    "chapters": 10,
+    "date_written": "450 BC"
+  },
+  "Nehemiah": {
+    "author": "Nehemiah",
+    "chapters": 13,
+    "date_written": "430 BC"
+  },
+  "Esther": {
+    "author": "Anonymous",
+    "chapters": 10,
+    "date_written": "460-350 BC"
+  },
+  "Job": {
+    "author": "Anonymous",
+    "chapters": 42,
+    "date_written": "2000-1800 BC"
+  },
+  "Psalms": {
+    "author": "David, Asaph, Sons of Korah, others",
+    "chapters": 150,
+    "date_written": "1440-586 BC"
+  },
+  "Proverbs": {
+    "author": "Solomon",
+    "chapters": 31,
+    "date_written": "970-931 BC"
+  },
+  "Ecclesiastes": {
+    "author": "Solomon",
+    "chapters": 12,
+    "date_written": "935 BC"
+  },
+  "Song of Solomon": {
+    "author": "Solomon",
+    "chapters": 8,
+    "date_written": "965 BC"
+  },
+  "Isaiah": {
+    "author": "Isaiah",
+    "chapters": 66,
+    "date_written": "740-681 BC"
+  },
+  "Jeremiah": {
+    "author": "Jeremiah",
+    "chapters": 52,
+    "date_written": "626-586 BC"
+  },
+  "Lamentations": {
+    "author": "Jeremiah",
+    "chapters": 5,
+    "date_written": "586 BC"
+  },
+  "Ezekiel": {
+    "author": "Ezekiel",
+    "chapters": 48,
+    "date_written": "593-571 BC"
+  },
+  "Daniel": {
+    "author": "Daniel",
+    "chapters": 12,
+    "date_written": "537 BC"
+  },
+  "Hosea": {
+    "author": "Hosea",
+    "chapters": 14,
+    "date_written": "755-710 BC"
+  },
+  "Joel": {
+    "author": "Joel",
+    "chapters": 3,
+    "date_written": "835-796 BC"
+  },
+  "Amos": {
+    "author": "Amos",
+    "chapters": 9,
+    "date_written": "760-750 BC"
+  },
+  "Obadiah": {
+    "author": "Obadiah",
+    "chapters": 1,
+    "date_written": "850 BC"
+  },
+  "Jonah": {
+    "author": "Jonah",
+    "chapters": 4,
+    "date_written": "760 BC"
+  },
+  "Micah": {
+    "author": "Micah",
+    "chapters": 7,
+    "date_written": "735-700 BC"
+  },
+  "Nahum": {
+    "author": "Nahum",
+    "chapters": 3,
+    "date_written": "660 BC"
+  },
+  "Habakkuk": {
+    "author": "Habakkuk",
+    "chapters": 3,
+    "date_written": "605 BC"
+  },
+  "Zephaniah": {
+    "author": "Zephaniah",
+    "chapters": 3,
+    "date_written": "630-620 BC"
+  },
+  "Haggai": {
+    "author": "Haggai",
+    "chapters": 2,
+    "date_written": "520 BC"
+  },
+  "Zechariah": {
+    "author": "Zechariah",
+    "chapters": 14,
+    "date_written": "520-518 BC"
+  },
+  "Malachi": {
+    "author": "Malachi",
+    "chapters": 4,
+    "date_written": "430 BC"
+  },
+  "Matthew": {
+    "author": "Matthew",
+    "chapters": 28,
+    "date_written": "60-70 AD"
+  },
+  "Mark": {
+    "author": "Mark",
+    "chapters": 16,
+    "date_written": "55-70 AD"
+  },
+  "Luke": {
+    "author": "Luke",
+    "chapters": 24,
+    "date_written": "60-61 AD"
+  },
+  "John": {
+    "author": "John",
+    "chapters": 21,
+    "date_written": "85-95 AD"
+  },
+  "Acts": {
+    "author": "Luke",
+    "chapters": 28,
+    "date_written": "62-63 AD"
+  },
+  "Romans": {
+    "author": "Paul",
+    "chapters": 16,
+    "date_written": "57 AD"
+  },
+  "1 Corinthians": {
+    "author": "Paul",
+    "chapters": 16,
+    "date_written": "55 AD"
+  },
+  "2 Corinthians": {
+    "author": "Paul",
+    "chapters": 13,
+    "date_written": "56 AD"
+  },
+  "Galatians": {
+    "author": "Paul",
+    "chapters": 6,
+    "date_written": "49-55 AD"
+  },
+  "Ephesians": {
+    "author": "Paul",
+    "chapters": 6,
+    "date_written": "60 AD"
+  },
+  "Philippians": {
+    "author": "Paul",
+    "chapters": 4,
+    "date_written": "60 AD"
+  },
+  "Colossians": {
+    "author": "Paul",
+    "chapters": 4,
+    "date_written": "60 AD"
+  },
+  "1 Thessalonians": {
+    "author": "Paul",
+    "chapters": 5,
+    "date_written": "51 AD"
+  },
+  "2 Thessalonians": {
+    "author": "Paul",
+    "chapters": 3,
+    "date_written": "51-52 AD"
+  },
+  "1 Timothy": {
+    "author": "Paul",
+    "chapters": 6,
+    "date_written": "63-65 AD"
+  },
+  "2 Timothy": {
+    "author": "Paul",
+    "chapters": 4,
+    "date_written": "67 AD"
+  },
+  "Titus": {
+    "author": "Paul",
+    "chapters": 3,
+    "date_written": "63-65 AD"
+  },
+  "Philemon": {
+    "author": "Paul",
+    "chapters": 1,
+    "date_written": "60-62 AD"
+  },
+  "Hebrews": {
+    "author": "Anonymous",
+    "chapters": 13,
+    "date_written": "60-70 AD"
+  },
+  "James": {
+    "author": "James",
+    "chapters": 5,
+    "date_written": "45-50 AD"
+  },
+  "1 Peter": {
+    "author": "Peter",
+    "chapters": 5,
+    "date_written": "60-64 AD"
+  },
+  "2 Peter": {
+    "author": "Peter",
+    "chapters": 3,
+    "date_written": "64-68 AD"
+  },
+  "1 John": {
+    "author": "John",
+    "chapters": 5,
+    "date_written": "85-95 AD"
+  },
+  "2 John": {
+    "author": "John",
+    "chapters": 1,
+    "date_written": "85-95 AD"
+  },
+  "3 John": {
+    "author": "John",
+    "chapters": 1,
+    "date_written": "85-95 AD"
+  },
+  "Jude": {
+    "author": "Jude",
+    "chapters": 1,
+    "date_written": "60-80 AD"
+  },
+  "Revelation": {
+    "author": "John",
+    "chapters": 22,
+    "date_written": "95-96 AD"
+  }
+}
