@@ -37,7 +37,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Function to fetch and load the Bible data from the JSON file
   function loadBibleData() {
-    fetch('https://zach-and-mickey.github.io/bible-app/bible_books.json')  // Path to your JSON file
+    fetch('https://zach-and-mickey.github.io/bible-app/books.json')  // Path to your JSON file
       .then(response => response.json())  // Parse the JSON response
       .then(bibleData => {
         // Call the function to populate dropdowns after the JSON is loaded
