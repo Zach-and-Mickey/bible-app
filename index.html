@@ -100,28 +100,43 @@
             loadBibleData();
         });
 
-        function searchBible(version, book, chapter) {
-            // Construct URL using template literals with backticks
-            const lowercaseBook = book.toLowerCase();
-            const url = `https://cdn.jsdelivr.net/gh/wldeh/bible-api/bibles/${version}/books/${lowercaseBook}/chapters/${chapter}.json`;
+function searchBible(version, book, chapter) {
+    // Convert the book value to lowercase
+    const lowerCaseBook = book.toLowerCase();
+    
+    // Construct URL using template literals with backticks
+    const url = `https://cdn.jsdelivr.net/gh/wldeh/bible-api/bibles/${version}/books/${lowerCaseBook}/chapters/${chapter}.json`;
 
-            console.log('Fetching URL:', url); // Log URL for debugging purposes
+    console.log('Fetching URL:', url); // Log URL for debugging purposes
 
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    // Check if data.text exists before displaying it
-                    const chapterText = data.text || 'No text available for this chapter.';
-                    console.log(chapterText);
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            // Access the array from data.key
+            const verses = data.data;
 
-                    // Optionally, display the result on the webpage
-                    document.getElementById("bibleText").innerHTML = chapterText;
-                })
-                .catch(error => {
-                    console.error("Error fetching Bible text:", error);
-                    document.getElementById("bibleText").innerHTML = 'Error loading Bible text. Please try again later.';
-                });
-        }
+            // Loop through verses and find the specific chapter and verse
+            const chapterText = verses
+                .filter(verse => verse.chapter === chapter)  // Filter by the chapter
+                .map(verse => {
+                    // Check if the chapter matches and display the text
+                    return `<p><strong>Verse ${verse.verse}: </strong>${verse.text}</p>`;
+                }).join('');
+
+            // If no verses are found, inform the user
+            if (!chapterText) {
+                chapterText = 'No text available for this chapter and verse.';
+            }
+
+            // Optionally, display the result on the webpage
+            document.getElementById("bibleText").innerHTML = chapterText;
+        })
+        .catch(error => {
+            console.error("Error fetching Bible text:", error);
+            document.getElementById("bibleText").innerHTML = 'Error loading Bible text. Please try again later.';
+        });
+}
+
     </script>
 
     <footer>
