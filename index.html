@@ -8,160 +8,293 @@
     <!-- Link to external CSS file or other head elements here -->
 </head>
 <style>
-    html {
-    
-    }
-    body {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        background-image: linear-gradient(gray, lightgray, gray)
-    }
-    label {
-        color: blue;
-        font-size: X-large;
-    }
-    select {
-        width: min-content;
-    }
-    #bibleText {
-        font-family: sans-serif;
-    }
-</style>
-<body>
-    <label for="version">Translation:</label>
-    <select id="version" name="version">
-        <option value="en-asv">American Standard Version</option>
-        <option value="en-t4t">Translation for Translators</option>
-        <option value="en-US-lxxup">Brenton English Septuagint</option>
-        <option value="en-fbv">Free Bible Version</option>
-        <option value="en-bsb">Berean Study Bible</option>
-        <option value="en-webus">World English Bible</option>
-    </select>
-
-    <label for="book">Book:</label>
-    <select id="book" name="book">
-        <option value="">Select Book</option>
-    </select>
-
-    <label for="chapter">Chapter:</label>
-    <select id="chapter" name="chapter">
-        <option value="">Select Chapter</option>
-    </select>
-
-    <h1>Book Chapter:Verse</h1>
-    <div id="bibleText"></div>
-
-    <script>
-        // Wait for the DOM to fully load
-        document.addEventListener('DOMContentLoaded', () => {
-            // Function to fetch and load the Bible data from the JSON file
-            function loadBibleData() {
-                fetch('https://zach-and-mickey.github.io/bible-app/books.json')  // Path to your JSON file
-                    .then(response => response.json())  // Parse the JSON response
-                    .then(bibleData => {
-                        // Call the function to populate dropdowns after the JSON is loaded
-                        populateBookDropdown(bibleData);
-                    })
-                    .catch(error => {
-                        console.error('Error loading Bible data:', error);
-                    });
-            }
-
-            // Function to populate the Book dropdown
-            function populateBookDropdown(bibleData) {
-                const bookDropdown = document.getElementById('book');
-                for (const book in bibleData) {
-                    const option = document.createElement('option');
-                    option.value = book;
-                    option.textContent = book;
-                    bookDropdown.appendChild(option);
-                }
-
-                // Add event listener to update chapter dropdown when a book is selected
-                bookDropdown.addEventListener('change', function () {
-                    const selectedBook = bookDropdown.value;
-                    const chapterDropdown = document.getElementById('chapter');
-
-                    // Clear previous chapter options
-                    chapterDropdown.innerHTML = '<option value="">Select Chapter</option>';
-
-                    if (selectedBook) {
-                        // Get the number of chapters for the selected book
-                        const numChapters = bibleData[selectedBook].chapters;
-
-                        // Populate chapter dropdown with options from 1 to the number of chapters
-                        for (let i = 1; i <= numChapters; i++) {
-                            const option = document.createElement('option');
-                            option.value = i;
-                            option.textContent = `Chapter ${i}`;
-                            chapterDropdown.appendChild(option);
-                        }
-                    }
-                });
-
-                // Add event listeners to update the Bible text when version, book, or chapter changes
-                document.getElementById("version").addEventListener("change", updateBibleText);
-                document.getElementById("book").addEventListener("change", updateBibleText);
-                document.getElementById("chapter").addEventListener("change", updateBibleText);
-
-                // Function to update Bible text
-                function updateBibleText() {
-                    const version = document.getElementById("version").value;
-                    const book = document.getElementById("book").value;
-                    const chapter = document.getElementById("chapter").value;
-
-                    if (version && book && chapter) {
-                        searchBible(version, book, chapter); // Call the search function
-                    }
-                }
-            }
-
-            // Load the Bible data on page load
-            loadBibleData();
-        });
-
-function searchBible(version, book, chapter) {
-    // Convert the book value to lowercase
-    const lowerCaseBook = book.toLowerCase();
-    
-    // Construct URL using template literals with backticks
-    const url = `https://cdn.jsdelivr.net/gh/wldeh/bible-api/bibles/${version}/books/${lowerCaseBook}/chapters/${chapter}.json`;
-
-    console.log('Fetching URL:', url); // Log URL for debugging purposes
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            // Access the array from data.key
-            const verses = data.data;
-
-            // Loop through verses and find the specific chapter and verse
-            const chapterText = verses
-                .filter(verse => verse.chapter === chapter)  // Filter by the chapter
-                .map(verse => {
-                    // Check if the chapter matches and display the text
-                    return `<p><strong>Verse ${verse.verse}: </strong>${verse.text}</p>`;
-                }).join('');
-
-            // If no verses are found, inform the user
-            if (!chapterText) {
-                chapterText = 'No text available for this chapter and verse.';
-            }
-
-            // Optionally, display the result on the webpage
-            document.getElementById("bibleText").innerHTML = chapterText;
-        })
-        .catch(error => {
-            console.error("Error fetching Bible text:", error);
-            document.getElementById("bibleText").innerHTML = 'Error loading Bible text. Please try again later.';
-        });
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+  background-image: linear-gradient(
+    gray,
+    lightgray,
+    gray
+  ); /* Added semicolon */
 }
 
-    </script>
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: linear-gradient(dimgray, lightgray, dimgray);
+  width: 100%;
+  padding: 1rem;
+  margin: 0;
+  box-sizing: border-box;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+}
+#top-header {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
 
-    <footer>
-        <p>Thanks to <a href="https://github.com/wldeh/bible-api" target="_blank">github.com/wldeh/bible-api</a> for making this possible!</p>
-    </footer>
+/* Center the links horizontally in the top header */
+#top-header a {
+  text-decoration: none;
+  margin: 0 2rem;
+  font-size: clamp(0.75rem, 1.5vw, 3rem);
+}
+
+#top-header a:hover {
+  text-decoration: underline;
+}
+#bottom-header {
+  padding: 10px;
+  background-color: #f1f1f1; /* Optional, just for better visibility */
+}
+
+#selection {
+  display: flex; /* Use flexbox */
+  justify-content: space-between; /* Distribute the items evenly */
+  align-items: center; /* Align items vertically */
+  gap: 10px; /* Optional: space between items */
+  flex-wrap: nowrap; /* Prevent wrapping */
+  /*   background-color: black; */
+  border-radius: 25px;
+}
+#selection div {
+  display: flex;
+  flex-direction: column; /* Stack label and select vertically */
+  align-items: center; /* Align the label and select to the left */
+  margin: 0 1vw;
+}
+
+main {
+  flex-grow: 1;
+}
+h1 {
+  text-align: center;
+  font-size: clamp(1rem, 1vw + 1rem, 4rem);
+}
+label {
+  color: blue;
+  font-size: clamp(0.75rem, 2vw, 3rem);
+  margin: 1vh 1vw;
+}
+
+select {
+  width: min-content;
+  margin: 1vh;
+  padding: 0.5rem; /* Added padding for better appearance */
+  border-radius: 20px;
+  text-align: center;
+  font-size: clamp(0.5rem, 1vw, 2rem);
+}
+
+#bibleText {
+  font-family: sans-serif;
+  width: 70vw;
+  font-size: clamp(1rem, 1vw, 3rem); /* Fluid font size */
+  margin: 0 auto; /* Centered text box */
+  padding: 1rem; /* Added padding for better readability */
+}
+footer {
+  text-align: center;
+}
+
+</style>
+<<body>
+  <header id='top-header'>
+    <a href='/'>Standard Reader</a>
+    <a href='/multiverse'>Multiverse</a>
+    <a href='/blog'>Blog</a>
+    <a href='/about'>About</a>
+  </header>
+  <header id='bottom-header'>
+    <div id='selection'>
+      <div>
+        <label for="version">Translation:</label>
+        <select id="version" name="version">
+          <option value="en-asv">American Standard Version</option>
+          <option value="en-t4t">Translation for Translators</option>
+          <option value="en-US-lxxup">Brenton English Septuagint</option>
+          <option value="en-fbv">Free Bible Version</option>
+          <option value="en-bsb">Berean Study Bible</option>
+          <option value="en-webus">World English Bible</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="book">Book:</label>
+        <select id="book" name="book">
+          <option value="">Select Book</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="chapter">Chapter:</label>
+        <select id="chapter" name="chapter">
+          <option value="">Select Chapter</option>
+        </select>
+      </div>
+    </div>
+  </header>
+  <main>
+    <h1 id='reference'>Book Chapter:Verse</h1>
+    <div id="bibleText"></div>
+  </main>
+
+  <footer>
+    <p>Thanks to <a href="https://github.com/wldeh/bible-api" target="_blank">github.com/wldeh/bible-api</a> for making this possible!</p>
+  </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+  // Function to fetch and load the Bible data from the JSON file
+  function loadBibleData() {
+    fetch("https://zach-and-mickey.github.io/bible-app/books.json") // Path to your JSON file
+      .then((response) => response.json()) // Parse the JSON response
+      .then((bibleData) => {
+        // Call the function to populate dropdowns after the JSON is loaded
+        populateBookDropdown(bibleData);
+      })
+      .catch((error) => {
+        console.error("Error loading Bible data:", error);
+      });
+  }
+
+  // Function to populate the Book dropdown
+  function populateBookDropdown(bibleData) {
+    const bookDropdown = document.getElementById("book");
+
+    // Clear previous options (if any)
+    bookDropdown.innerHTML = '<option value="">Select Book</option>';
+
+    // Populate dropdown with books from bibleData
+    for (const book in bibleData) {
+      const option = document.createElement("option");
+      option.value = book;
+      option.textContent = book;
+      bookDropdown.appendChild(option);
+    }
+
+    // Set default value to Genesis after populating the dropdown
+    bookDropdown.value = "Genesis"; // Default to Genesis
+    populateChapterDropdown(bibleData["Genesis"].chapters); // Default to Genesis chapters
+    updateBibleText(); // Call the function to update the Bible text with the default values
+
+    // Add event listener to update chapter dropdown when a book is selected
+    bookDropdown.addEventListener("change", function () {
+      const selectedBook = bookDropdown.value;
+      const chapterDropdown = document.getElementById("chapter");
+
+      // Clear previous chapter options
+      chapterDropdown.innerHTML = '<option value="">Select Chapter</option>';
+
+      if (selectedBook) {
+        // Get the number of chapters for the selected book
+        const numChapters = bibleData[selectedBook].chapters;
+
+        // Populate chapter dropdown with options from 1 to the number of chapters
+        for (let i = 1; i <= numChapters; i++) {
+          const option = document.createElement("option");
+          option.value = i;
+          option.textContent = `Chapter ${i}`;
+          chapterDropdown.appendChild(option);
+        }
+
+        // Set default chapter value to 1 after updating the chapters
+        chapterDropdown.value = "1"; // Default to Chapter 1
+        updateBibleText(); // Call the function to update the Bible text for Genesis 1
+      }
+    });
+
+    // Add event listeners to update the Bible text when version, book, or chapter changes
+    document
+      .getElementById("version")
+      .addEventListener("change", updateBibleText);
+    document.getElementById("book").addEventListener("change", updateBibleText);
+    document
+      .getElementById("chapter")
+      .addEventListener("change", updateBibleText);
+  }
+
+  // Function to populate the Chapter dropdown
+  function populateChapterDropdown(numChapters) {
+    const chapterDropdown = document.getElementById("chapter");
+
+    // Clear previous chapter options
+    chapterDropdown.innerHTML = '<option value="">Select Chapter</option>';
+
+    // Populate chapter dropdown with options from 1 to the number of chapters
+    for (let i = 1; i <= numChapters; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = `Chapter ${i}`;
+      chapterDropdown.appendChild(option);
+    }
+
+    // Set default value for chapter dropdown to 1 after populating chapters
+    chapterDropdown.value = "1"; // Default to Chapter 1
+  }
+
+  // Function to update Bible text
+  function updateBibleText() {
+    const version = document.getElementById("version").value;
+    const book = document.getElementById("book").value;
+    const chapter = document.getElementById("chapter").value;
+
+    if (version && book && chapter) {
+      searchBible(version, book, chapter); // Call the search function to fetch the Bible text
+    }
+  }
+
+  // Function to search for the Bible text
+  function searchBible(version, book, chapter) {
+    const lowerCaseBook = book.toLowerCase();
+
+    const url = `https://cdn.jsdelivr.net/gh/wldeh/bible-api/bibles/${version}/books/${lowerCaseBook}/chapters/${chapter}.json`;
+
+    console.log("Fetching URL:", url); // Log URL for debugging purposes
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        const verses = data.data;
+
+        const chapterText = verses
+          .filter((verse) => verse.chapter === chapter)
+          .map((verse) => {
+            return `<p><strong>Verse ${verse.verse}: </strong>${verse.text}</p>`;
+          })
+          .join("");
+
+        if (!chapterText) {
+          chapterText = "No text available for this chapter and verse.";
+        }
+
+        // Display the result on the webpage
+        document.getElementById("bibleText").innerHTML = chapterText;
+        document.getElementById("reference").innerHTML = `${book} ${chapter}`;
+      })
+      .catch((error) => {
+        console.error("Error fetching Bible text:", error);
+        document.getElementById("bibleText").innerHTML =
+          "Error loading Bible text. Please try again later.";
+      });
+  }
+
+  // Load the Bible data on page load
+  loadBibleData();
+});
+</script>
 </body>
+
 </html>
