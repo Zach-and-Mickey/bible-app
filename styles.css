@@ -41,7 +41,7 @@ header {
 #top-header a:hover {
   text-decoration: underline;
 }
-#top-header a:active {
+#top-header a.active {
   color: red;
 }
 #top-header a:visited {
