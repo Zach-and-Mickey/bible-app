@@ -12,4 +12,18 @@
   </header>
   <h1>About my website</h1>
   <p>Thank you for visiting my site. I know there are many other Bible websites out there. This is a bit of a passion project for me. I taught myself some simple web development skills and at first I was making random things to play around with, but I wanted to do something more useful. I decided to start on a Bible App. The difference between this site and many other Bible sites is that I am constantly trying to improve it. If you have an idea for a feature, let me know on the github repository and I will see what I can do.</p>
+<script>
+    // Get all links in the navigation menu
+    const links = document.querySelectorAll('a');
+
+    // Loop through each link and check if the href matches the current page URL
+    links.forEach(link => {
+        if (link.href === window.location.href) {
+            link.classList.add('active'); // Add the 'active' class to the current page link
+        } else {
+            link.classList.remove('active'); // Remove the 'active' class from other links
+        }
+    });
+</script>
 </body>
+</html>
