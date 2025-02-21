@@ -45,7 +45,7 @@ header {
   color: red;
 }
 #top-header a:visited {
-  color: #0000EE;
+  color: inherit;
 }
 #bottom-header {
   padding: 10px;
