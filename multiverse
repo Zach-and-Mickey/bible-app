@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<body>
+<p> Welcome to the Multiverse! You can select up to 3 different versions to compare side by side</p>
+<div>
+<button onclick=twoVersions> 2 Versions</button>
+<button onclick=threeVersions> 3 Versions</button>
+</div>
+</body>
+</html>
