@@ -41,11 +41,11 @@ header {
 #top-header a:hover {
   text-decoration: underline;
 }
-#top-header a.active {
-  color: red !important;
+#top-header a:active {
+  color: red;
 }
 #top-header a:visited {
-  color: #0000EE;
+  color: #00000EE;
 }
 #bottom-header {
   padding: 10px;
@@ -98,5 +98,19 @@ select {
   padding: 1rem; /* Added padding for better readability */
 }
 footer {
+  display: flex;
+  width: auto;
+  justify-content: space-between;
+  align-items:center;
   text-align: center;
+  margin: 0 20vw 0 20vw;
+}
+button {
+  color: blue;
+  font-size: clamp(1rem,2vw,2rem);
+  border-radius: 20px;
+  transition: .3s ease-in-out;
+}
+button:hover{
+  background-color: gray;
 }
