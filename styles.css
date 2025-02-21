@@ -42,10 +42,10 @@ header {
   text-decoration: underline;
 }
 #top-header a.active {
-  color: red;
+  color: red !important;
 }
 #top-header a:visited {
-  color: inherit;
+  color: #0000EE;
 }
 #bottom-header {
   padding: 10px;
