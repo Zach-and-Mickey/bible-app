@@ -41,6 +41,12 @@ header {
 #top-header a:hover {
   text-decoration: underline;
 }
+#top-header a:active {
+  color: red;
+}
+#top-header a:visited {
+  color: #00000EE;
+}
 #bottom-header {
   padding: 10px;
   background-color: #f1f1f1; /* Optional, just for better visibility */
