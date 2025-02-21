@@ -1,0 +1,96 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+  background-image: linear-gradient(gray,lightgray,gray);
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: linear-gradient(dimgray, lightgray, dimgray);
+  width: 100%;
+  padding: 1rem;
+  margin: 0;
+  box-sizing: border-box;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+}
+#top-header {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Center the links horizontally in the top header */
+#top-header a {
+  text-decoration: none;
+  margin: 0 2rem;
+  font-size: clamp(0.75rem, 1.5vw, 3rem);
+}
+
+#top-header a:hover {
+  text-decoration: underline;
+}
+#bottom-header {
+  padding: 10px;
+  background-color: #f1f1f1; /* Optional, just for better visibility */
+}
+
+#selection {
+  display: flex; /* Use flexbox */
+  justify-content: space-between; /* Distribute the items evenly */
+  align-items: center; /* Align items vertically */
+  gap: 10px; /* Optional: space between items */
+  flex-wrap: nowrap; /* Prevent wrapping */
+  /*   background-color: black; */
+  border-radius: 25px;
+}
+#selection div {
+  display: flex;
+  flex-direction: column; /* Stack label and select vertically */
+  align-items: center; /* Align the label and select to the left */
+  margin: 0 1vw;
+}
+
+main {
+  flex-grow: 1;
+}
+h1 {
+  text-align: center;
+  font-size: clamp(1rem, 1vw + 1rem, 4rem);
+}
+label {
+  color: blue;
+  font-size: clamp(0.75rem, 2vw, 3rem);
+  margin: 1vh 1vw;
+}
+
+select {
+  width: min-content;
+  margin: 1vh;
+  padding: 0.5rem; /* Added padding for better appearance */
+  border-radius: 20px;
+  text-align: center;
+  font-size: clamp(0.5rem, 1vw, 2rem);
+}
+
+#bibleText {
+  font-family: sans-serif;
+  width: 70vw;
+  font-size: clamp(1rem, 1vw, 3rem); /* Fluid font size */
+  margin: 0 auto; /* Centered text box */
+  padding: 1rem; /* Added padding for better readability */
+}
+footer {
+  text-align: center;
+}
