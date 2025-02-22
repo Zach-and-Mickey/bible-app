@@ -5,29 +5,100 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class='top-header'>
-    <a href='index'>Standard Reader</a>
-    <a href='multiverse'>Multiverse</a>
-    <a href='blog'>Blog</a>
-    <a href='about'>About</a>
-  </header>
-<p> Welcome to the Multiverse! You can select up to 3 different versions to compare side by side.</p>
-<div id='version-buttons'>
-<button onclick=twoVersions> 2 Versions</button>
-<button onclick=threeVersions> 3 Versions</button>
-</div>
-  <script>
-    // Get all links in the navigation menu
-    const links = document.querySelectorAll('a');
+  <header class='top-header'>
+  <a href='index'>Standard Reader</a>
+  <a href='multiverse'>Multiverse</a>
+  <a href='blog'>Blog</a>
+  <a href='about'>About</a>
+</header>
+<header class='bottom-header'>
+  <div id='multiverse-header'>
+    <button id="twoVersions">2 Versions</button>
+    <button id="threeVersions">3 Versions</button>
+  </div>
+</header>
 
-    // Loop through each link and check if the href matches the current page URL
-    links.forEach(link => {
-        if (link.href === window.location.href) {
-            link.classList.add('active'); // Add the 'active' class to the current page link
-        } else {
-            link.classList.remove('active'); // Remove the 'active' class from other links
-        }
-    });
+<p id='myParagraph'> Welcome to the Multiverse! You can select up to 3 different versions to compare side by side.</p>
+
+<div id="content">
+  <div class="version" id="version1">
+    <select id="selected1" name="selected1">
+      <option value="en-asv">American Standard Version</option>
+      <option value="en-t4t">Translation for Translators</option>
+      <option value="en-US-lxxup">Brenton English Septuagint</option>
+      <option value="en-fbv">Free Bible Version</option>
+      <option value="en-bsb">Berean Study Bible</option>
+      <option value="en-webus">World English Bible</option>
+    </select>
+  </div>
+  <div class="version" id="version2">
+    <select id="selected2" name="selected2">
+      <option value="en-asv">American Standard Version</option>
+      <option value="en-t4t">Translation for Translators</option>
+      <option value="en-US-lxxup">Brenton English Septuagint</option>
+      <option value="en-fbv">Free Bible Version</option>
+      <option value="en-bsb">Berean Study Bible</option>
+      <option value="en-webus">World English Bible</option>
+    </select>
+  </div>
+  <div class="version" id="version3">
+    <select id="selected3" name="selected3">
+      <option value="en-asv">American Standard Version</option>
+      <option value="en-t4t">Translation for Translators</option>
+      <option value="en-US-lxxup">Brenton English Septuagint</option>
+      <option value="en-fbv">Free Bible Version</option>
+      <option value="en-bsb">Berean Study Bible</option>
+      <option value="en-webus">World English Bible</option>
+    </select>
+  </div>
+</div>>
+  <script>
+// Get all links in the navigation menu
+const links = document.querySelectorAll("a");
+
+// Loop through each link and check if the href matches the current page URL
+links.forEach((link) => {
+  if (link.href === window.location.href) {
+    link.classList.add("active"); // Add the 'active' class to the current page link
+  } else {
+    link.classList.remove("active"); // Remove the 'active' class from other links
+  }
+});
+let isButtonClicked = false;
+document.getElementById("twoVersions").addEventListener("click", function () {
+  // Set grid to 2 columns
+  document.getElementById("content").style.gridTemplateColumns =
+    "repeat(2, 1fr)";
+  // Make sure all versions are visible
+  document.getElementById("version1").style.display = "block";
+  document.getElementById("version2").style.display = "block";
+  document.getElementById("version3").style.display = "none";
+  if (!isButtonClicked) {
+    document.getElementById("myParagraph").style.display = "none";
+    isButtonClicked = true; // Mark that a button has been clicked
+  }
+});
+
+document.getElementById("threeVersions").addEventListener("click", function () {
+  // Set grid to 3 columns
+  document.getElementById("content").style.gridTemplateColumns =
+    "repeat(3, 1fr)";
+  // Make sure all versions are visible
+  document.getElementById("version1").style.display = "block";
+  document.getElementById("version2").style.display = "block";
+  document.getElementById("version3").style.display = "block";
+  if (!isButtonClicked) {
+    document.getElementById("myParagraph").style.display = "none";
+    isButtonClicked = true; // Mark that a button has been clicked
+  }
+});
+window.onload = function () {
+  document.getElementById("version1").style.display = "none";
+  document.getElementById("version2").style.display = "none";
+  document.getElementById("version3").style.display = "none";
+  document.getElementById("myParagraph").style.display = "block"; // Ensure p element is visible initially
+};
+
 </script>
 </body>
 </html>
