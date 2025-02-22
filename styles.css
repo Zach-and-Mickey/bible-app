@@ -23,7 +23,7 @@ header {
   box-sizing: border-box;
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
 }
-#top-header {
+.top-header {
   padding: 1rem;
   display: flex;
   justify-content: center;
@@ -32,19 +32,19 @@ header {
 }
 
 /* Center the links horizontally in the top header */
-#top-header a {
+.top-header a {
   text-decoration: none;
   margin: 0 2rem;
   font-size: clamp(0.75rem, 1.5vw, 3rem);
 }
 
-#top-header a:hover {
+.top-header a:hover {
   text-decoration: underline;
 }
-#top-header a:active {
+.top-header a:active {
   color: red;
 }
-#top-header a:visited {
+.top-header a:visited {
   color: #0000EE;
 }
 #bottom-header {
