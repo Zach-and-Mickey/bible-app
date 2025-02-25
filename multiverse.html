@@ -5,18 +5,34 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <header class='top-header'>
+<header class='top-header'>
   <a href='index'>Standard Reader</a>
   <a href='multiverse'>Multiverse</a>
-  <a href='https://zach-and-mickey.github.io/my-blog' target='blank'>Blog</a>
+  <a href='blog'>Blog</a>
   <a href='about'>About</a>
-    </header>
- </header
+</header>
 <header class='bottom-header'>
   <div id='multiverse-header'>
-    <button id="twoVersions">2 Versions</button>
-    <button id="threeVersions">3 Versions</button>
+    <div>
+      <label for='View'> View:</label>
+      <select id='view' name='view'>
+        <option value=''>Select View</option>
+        <option value='twoVersions'>Compare 2 Versions</option>
+        <option value='threeVersions'>Compare 3 Versions</option>
+      </select>
+    </div>
+    <div>
+      <label for="book">Book:</label>
+      <select id="book" name="book">
+        <option value="">Select Book</option>
+      </select>
+    </div>
+    <div>
+      <label for="chapter">Chapter:</label>
+      <select id="chapter" name="chapter">
+        <option value="">Select Chapter</option>
+      </select>
+    </div>
   </div>
 </header>
 
@@ -32,6 +48,7 @@
       <option value="en-bsb">Berean Study Bible</option>
       <option value="en-webus">World English Bible</option>
     </select>
+    <div class='bibleText' id='bibleText1'></div>
   </div>
   <div class="version" id="version2">
     <select id="selected2" name="selected2">
@@ -42,6 +59,7 @@
       <option value="en-bsb">Berean Study Bible</option>
       <option value="en-webus">World English Bible</option>
     </select>
+    <div class='bibleText' id='bibleText2'></div>
   </div>
   <div class="version" id="version3">
     <select id="selected3" name="selected3">
@@ -52,8 +70,9 @@
       <option value="en-bsb">Berean Study Bible</option>
       <option value="en-webus">World English Bible</option>
     </select>
+    <div class='bibleText' id='bibleText3'></div>
   </div>
-</div>>
+</div>
   <script>
 // Get all links in the navigation menu
 const links = document.querySelectorAll("a");
@@ -66,40 +85,284 @@ links.forEach((link) => {
     link.classList.remove("active"); // Remove the 'active' class from other links
   }
 });
-let isButtonClicked = false;
-document.getElementById("twoVersions").addEventListener("click", function () {
-  // Set grid to 2 columns
-  document.getElementById("content").style.gridTemplateColumns =
-    "repeat(2, 1fr)";
-  // Make sure all versions are visible
-  document.getElementById("version1").style.display = "block";
-  document.getElementById("version2").style.display = "block";
-  document.getElementById("version3").style.display = "none";
-  if (!isButtonClicked) {
-    document.getElementById("myParagraph").style.display = "none";
-    isButtonClicked = true; // Mark that a button has been clicked
-  }
-});
 
-document.getElementById("threeVersions").addEventListener("click", function () {
-  // Set grid to 3 columns
-  document.getElementById("content").style.gridTemplateColumns =
-    "repeat(3, 1fr)";
-  // Make sure all versions are visible
-  document.getElementById("version1").style.display = "block";
-  document.getElementById("version2").style.display = "block";
-  document.getElementById("version3").style.display = "block";
-  if (!isButtonClicked) {
-    document.getElementById("myParagraph").style.display = "none";
-    isButtonClicked = true; // Mark that a button has been clicked
+let isButtonClicked = false;
+
+function twoVersions() {
+  const version1 = document.getElementById("version1");
+  const version2 = document.getElementById("version2");
+  const version3 = document.getElementById("version3");
+  const content = document.getElementById("content");
+  const myParagraph = document.getElementById("myParagraph");
+
+  if (version1 && version2 && version3 && content && myParagraph) {
+    // Set grid to 2 columns
+    content.style.gridTemplateColumns = "repeat(2, 1fr)";
+    // Make sure all versions are visible
+    version1.style.display = "block";
+    version2.style.display = "block";
+    version3.style.display = "none";
+
+    if (!isButtonClicked) {
+      myParagraph.style.display = "none";
+      isButtonClicked = true; // Mark that a button has been clicked
+    }
+  } else {
+    console.error("One or more elements are missing for twoVersions()");
   }
-});
+}
+
+function threeVersions() {
+  const version1 = document.getElementById("version1");
+  const version2 = document.getElementById("version2");
+  const version3 = document.getElementById("version3");
+  const content = document.getElementById("content");
+  const myParagraph = document.getElementById("myParagraph");
+
+  if (version1 && version2 && version3 && content && myParagraph) {
+    // Set grid to 3 columns
+    content.style.gridTemplateColumns = "repeat(3, 1fr)";
+    // Make sure all versions are visible
+    version1.style.display = "block";
+    version2.style.display = "block";
+    version3.style.display = "block";
+
+    if (!isButtonClicked) {
+      myParagraph.style.display = "none";
+      isButtonClicked = true; // Mark that a button has been clicked
+    }
+  } else {
+    console.error("One or more Bible text elements are missing!");
+  }
+}
+
 window.onload = function () {
-  document.getElementById("version1").style.display = "none";
-  document.getElementById("version2").style.display = "none";
-  document.getElementById("version3").style.display = "none";
-  document.getElementById("myParagraph").style.display = "block"; // Ensure p element is visible initially
+  const version1 = document.getElementById("version1");
+  const version2 = document.getElementById("version2");
+  const version3 = document.getElementById("version3");
+  const myParagraph = document.getElementById("myParagraph");
+
+  if (version1 && version2 && version3 && myParagraph) {
+    version1.style.display = "none";
+    version2.style.display = "none";
+    version3.style.display = "none";
+    myParagraph.style.display = "block"; // Ensure p element is visible initially
+  } else {
+    console.error("One or more elements are missing in window.onload.");
+  }
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Function to fetch and load the Bible data from the JSON file
+  function loadBibleData() {
+    fetch("https://zach-and-mickey.github.io/bible-app/books.json") // Path to your JSON file
+      .then((response) => response.json()) // Parse the JSON response
+      .then((bibleData) => {
+        // Call the function to populate dropdowns after the JSON is loaded
+        populateBookDropdown(bibleData);
+      })
+      .catch((error) => {
+        console.error("Error loading Bible data:", error);
+      });
+  }
+
+  // Function to populate the Book dropdown
+  function populateBookDropdown(bibleData) {
+    const bookDropdown = document.getElementById("book");
+
+    if (bookDropdown) {
+      // Clear previous options (if any)
+      bookDropdown.innerHTML = '<option value="">Select Book</option>';
+
+      // Populate dropdown with books from bibleData
+      for (const book in bibleData) {
+        const option = document.createElement("option");
+        option.value = book;
+        option.textContent = book;
+        bookDropdown.appendChild(option);
+      }
+
+      // Set default value to Genesis after populating the dropdown
+      bookDropdown.value = "Genesis"; // Default to Genesis
+      populateChapterDropdown(bibleData["Genesis"].chapters); // Default to Genesis chapters
+      updateBibleText(); // Call the function to update the Bible text with the default values
+
+      // Add event listener to update chapter dropdown when a book is selected
+      bookDropdown.addEventListener("change", function () {
+        const selectedBook = bookDropdown.value;
+        const chapterDropdown = document.getElementById("chapter");
+
+        if (chapterDropdown) {
+          // Clear previous chapter options
+          chapterDropdown.innerHTML =
+            '<option value="">Select Chapter</option>';
+
+          if (selectedBook) {
+            // Get the number of chapters for the selected book
+            const numChapters = bibleData[selectedBook].chapters;
+
+            // Populate chapter dropdown with options from 1 to the number of chapters
+            for (let i = 1; i <= numChapters; i++) {
+              const option = document.createElement("option");
+              option.value = i;
+              option.textContent = `Chapter ${i}`;
+              chapterDropdown.appendChild(option);
+            }
+
+            // Set default chapter value to 1 after updating the chapters
+            chapterDropdown.value = "1"; // Default to Chapter 1
+            updateBibleText(); // Call the function to update the Bible text for Genesis 1
+          }
+        }
+      });
+
+      // Add event listeners to update the Bible text when version, book, or chapter changes
+      const selected1 = document.getElementById("selected1");
+      const selected2 = document.getElementById("selected2");
+      const selected3 = document.getElementById("selected3");
+      const book = document.getElementById("book");
+      const chapter = document.getElementById("chapter");
+
+      if (selected1 && selected2 && selected3 && book && chapter) {
+        selected1.addEventListener("change", updateBibleText);
+        selected2.addEventListener("change", updateBibleText);
+        selected3.addEventListener("change", updateBibleText);
+        book.addEventListener("change", updateBibleText);
+        chapter.addEventListener("change", updateBibleText);
+      }
+    }
+  }
+
+  // Function to populate the Chapter dropdown
+  function populateChapterDropdown(numChapters) {
+    const chapterDropdown = document.getElementById("chapter");
+
+    if (chapterDropdown) {
+      // Clear previous chapter options
+      chapterDropdown.innerHTML = '<option value="">Select Chapter</option>';
+
+      // Populate chapter dropdown with options from 1 to the number of chapters
+      for (let i = 1; i <= numChapters; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = `Chapter ${i}`;
+        chapterDropdown.appendChild(option);
+      }
+
+      // Set default value for chapter dropdown to 1 after populating chapters
+      chapterDropdown.value = "1"; // Default to Chapter 1
+    }
+  }
+
+  // Function to update Bible text
+  function updateBibleText() {
+    const selected1 = document.getElementById("selected1").value;
+    const selected2 = document.getElementById("selected2").value;
+    const selected3 = document.getElementById("selected3").value;
+    const book = document.getElementById("book").value;
+    const chapter = document.getElementById("chapter").value;
+
+    if (version1 && version2 && version3 && book && chapter) {
+      searchBible(selected1, selected2, selected3, book, chapter); // Call the search function to fetch the Bible text
+    }
+  }
+
+  function updateView() {
+    const view = document.getElementById("view").value;
+
+    // Set initial values for selected1, selected2, and selected3
+    document.getElementById("selected1").value = "en-asv"; // Set first version to ASV
+    document.getElementById("selected2").value = "en-t4t"; // Set second version to T4T
+    document.getElementById("selected3").value = "en-bsb"; // Set third version to BSB
+
+    // Trigger change events for each version dropdown to update Bible text accordingly
+    document.getElementById("selected1").dispatchEvent(new Event("change"));
+    document.getElementById("selected2").dispatchEvent(new Event("change"));
+    document.getElementById("selected3").dispatchEvent(new Event("change"));
+
+    if (view === "twoVersions") {
+      twoVersions(); // Set up for 2 versions view
+    }
+    if (view === "threeVersions") {
+      threeVersions(); // Set up for 3 versions view
+    }
+
+    // After updating the view, fetch and update Bible text based on current selections
+    updateBibleText(); // This will call the searchBible function
+  }
+
+  document.getElementById("view").addEventListener("change", updateView);
+
+  // Function to search for the Bible text
+  function searchBible(selected1, selected2, selected3, book, chapter) {
+    const lowerCaseBook = book.toLowerCase();
+
+    const url1 = `https://cdn.jsdelivr.net/gh/wldeh/bible-api/bibles/${selected1}/books/${lowerCaseBook}/chapters/${chapter}.json`;
+    const url2 = `https://cdn.jsdelivr.net/gh/wldeh/bible-api/bibles/${selected2}/books/${lowerCaseBook}/chapters/${chapter}.json`;
+    const url3 = `https://cdn.jsdelivr.net/gh/wldeh/bible-api/bibles/${selected3}/books/${lowerCaseBook}/chapters/${chapter}.json`;
+
+    console.log("Fetching Bible text from:");
+    console.log(url1, url2, url3); // Debug log
+
+    // Fetch all three versions in parallel using Promise.all
+    Promise.all([fetch(url1), fetch(url2), fetch(url3)])
+      .then(([response1, response2, response3]) => {
+        return Promise.all([
+          response1.json(),
+          response2.json(),
+          response3.json()
+        ]);
+      })
+      .then(([data1, data2, data3]) => {
+        console.log("Bible data fetched:", data1, data2, data3); // Debug log
+
+        // Process each version's response
+        const verses1 = data1.data || [];
+        console.log(verses1);
+        const chapterText1 = verses1
+          .filter((verse) => verse.chapter === chapter)
+          .map((verse) => {
+            return `<div class='verse'><strong>Verse ${verse.verse}: </strong>${verse.text}</div>`;
+          })
+          .join("");
+        document.getElementById("bibleText1").innerHTML =
+          chapterText1 || "No text available for this chapter and verse.";
+
+        const verses2 = data2.data || [];
+        const chapterText2 = verses2
+          .filter((verse) => verse.chapter === chapter)
+          .map((verse) => {
+            return `<div class='verse'><strong>Verse ${verse.verse}: </strong>${verse.text}</div>`;
+          })
+          .join("");
+        document.getElementById("bibleText2").innerHTML =
+          chapterText2 || "No text available for this chapter and verse.";
+
+        const verses3 = data3.data || [];
+        const chapterText3 = verses3
+          .filter((verse) => verse.chapter === chapter)
+          .map((verse) => {
+            return `<div  class='verse'><strong>Verse ${verse.verse}: </strong>${verse.text}</div>`;
+          })
+          .join("");
+        document.getElementById("bibleText3").innerHTML =
+          chapterText3 || "No text available for this chapter and verse.";
+      })
+      .catch((error) => {
+        console.error("Error fetching Bible text:", error);
+        // Update all areas with an error message if any request fails
+        document.getElementById("bibleText1").innerHTML =
+          "Error loading Bible text. Please try again later.";
+        document.getElementById("bibleText2").innerHTML =
+          "Error loading Bible text. Please try again later.";
+        document.getElementById("bibleText3").innerHTML =
+          "Error loading Bible text. Please try again later.";
+      });
+  }
+
+  // Load the Bible data on page load
+  loadBibleData();
+});
 
 </script>
 </body>
