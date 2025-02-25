@@ -98,12 +98,15 @@ select {
   font-size: clamp(0.5rem, 1vw, 2rem);
 }
 
-#bibleText {
+.bibleText {
   font-family: sans-serif;
-  width: 70vw;
+  width: auto;
   font-size: clamp(1rem, 1vw, 3rem); /* Fluid font size */
   margin: 0 auto; /* Centered text box */
-  padding: 1rem; /* Added padding for better readability */
+  padding: 0; /* Added padding for better readability */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 footer {
   display: flex;
@@ -131,6 +134,8 @@ button:hover {
 }
 p {
   font-size: clamp(1rem, 1.5vw, 3rem);
+  width: 75%;
+  text-align: center;
 }
 #content {
   display: grid;
@@ -153,4 +158,9 @@ p {
   justify-content: center;
   align-items: center;
   height: 100%; /* Make sure the content fills the height of each column */
+}
+.verse {
+  height: 150px;
+  overflow-y: auto;
+  margin: 20px;
 }
