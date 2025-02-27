@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Reading Plan</title>
+    <style>
+        .day-plan { margin-bottom: 20px; }
+        h3 { font-size: 1.5em; margin: 0; }
+        ul { list-style-type: none; padding-left: 20px; }
+        li { font-size: 1.1em; }
+    </style>
+</head>
+<body>
+    <div id="readingPlan"></div>
+
+<script>
+
+function getDayOfYear(date = new Date()) {
+const year = date.getFullYear(); // Current Year
+const startOfYear = new Date(year, 0, 1); //January 1st
+const yearStartDayOfWeek = startOfYear.getDay(); //Day of Week for January 1st
+const timeDifference = date - startOfYear;
+const dayOfYear = Math.floor(timeDifference/(1000*60*60*24))+1;
+return dayOfYear;
+}
+
+const todayDayOfYear = getDayOfYear();
+console.log(todayDayOfYear);
+
+function generateReadingPlan() {
+fetch('books.json')
+  .then(response => response.json())
+  .then(data => {
+      bibleBooks = data;
+ 	})
+  .catch(error => console.error('Error loading Bible data:', error));
+    let plan = [];
+    let currentBookIndex = 0;
+    let currentChapter = 1; // Start from Genesis 1
+    let chaptersToday;
+    const day = (todayDayOfYear+2)%7;
+    console.log(day);
+
+
+	if (day === 0) {
+		chaptersToday = 5;
+	} else {
+        	chaptersToday = 3;
+	}
+
+
+        let dailyReading = [];
+
+
+        // Gather the chapters for this day
+        for (let i = 0; i < chaptersToday; i++) {
+            // Add the current chapter to the day's reading plan
+            dailyReading.push(`${bibleBooks[currentBookIndex].book} ${currentChapter}`);
+
+            // Move to the next chapter
+            currentChapter++;
+
+            // Check if we need to move to the next book
+            if (currentChapter > bibleBooks[currentBookIndex].chapters) {
+                currentBookIndex++;
+                currentChapter = 1; // Reset chapter count for the next book
+            }
+        }
+
+        // Add this day's reading to the plan
+        plan.push({
+            day: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][day],
+            reading: dailyReading
+        });
+    }
+
+function displayTodayReading(plan) {
+    const currentDay = new Date().getDay();  // Get the current day (0 = Sunday, 1 = Monday, ...)
+    const todayPlan = plan[currentDay]; // Get the reading for today
+
+    const container = document.getElementById('readingPlan');
+    container.innerHTML = ''; // Clear any previous plan
+
+    let dayDiv = document.createElement('div');
+    dayDiv.classList.add('day-plan');
+    let dayHeader = document.createElement('h3');
+    dayHeader.textContent = todayPlan.day;
+    dayDiv.appendChild(dayHeader);
+
+    let ul = document.createElement('ul');
+    todayPlan.reading.forEach(chapter => {
+        let li = document.createElement('li');
+        li.textContent = chapter;
+        ul.appendChild(li);
+    });
+
+    dayDiv.appendChild(ul);
+    container.appendChild(dayDiv);
+}
+
+// Generate the reading plan and display today's reading
+document.addEventListener('DOMContentLoaded', () => {
+    getDayOfYear();
+    const plan = generateReadingPlan();
+    displayTodayReading(plan); // Display only today's reading
+});
+</script>
+</body>
+</html>
