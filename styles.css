@@ -55,8 +55,6 @@ header {
   background-color: #f1f1f1; /* Optional, just for better visibility */
 }
 #multiverse-header {
-  display: flex;
-  justify-content: space-between;
   width: 50%;
 }
 
