@@ -47,7 +47,6 @@ function generateReadingPlan() {
             const day = (todayDayOfYear + 2) % 7;
             console.log('Day: ', day);
             console.log('bibleBooks: ', bibleBooks);
-            console.log('Books: ',response);
 
             if (day === 0) {
                 chaptersToday = 5;
@@ -77,8 +76,8 @@ function generateReadingPlan() {
                 day: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][day],
                 reading: dailyReading
             });
-
             return plan;
+	    console.log(plan)
         })
         .catch(error => console.error('Error loading Bible data:', error));
 }
