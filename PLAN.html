@@ -60,6 +60,7 @@ async function getBibleDataAndReadings() {
         // Total chapters read until today:
         // 3 chapters for Monday through Saturday, 5 chapters for Sunday
         const chaptersRead = (dayOfYear - numSundays) * 3 + numSundays * 5;
+        console.log("Chapters Read:", chaptersRead);
         
         // Ensure we don't go out of bounds of the Bible's chapters
         if (chaptersRead >= bibleData.length) {
