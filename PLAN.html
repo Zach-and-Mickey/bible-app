@@ -46,7 +46,7 @@ function getNumSundays(dayOfYear) {
 async function getBibleDataAndReadings() {
     try {
         // Fetch the Bible data from the JSON file
-        const response = await fetch('bible_with_chapters.json');
+        const response = await fetch('books_with_chapters.json');
         const bibleData = await response.json();
         
         // Get the current day of the year and weekday
