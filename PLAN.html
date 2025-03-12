@@ -23,82 +23,90 @@
     <div id="readingPlan"></div>
 
 <script>
-
-function getDayOfYear(date = new Date()) {
-    const year = date.getFullYear(); // Current Year
-    const startOfYear = new Date(year, 0, 1); // January 1st
-    const yearStartDayOfWeek = startOfYear.getDay(); // Day of Week for January 1st
-    const timeDifference = date - startOfYear;
-    const dayOfYear = Math.floor(timeDifference / (1000 * 60 * 60 * 24)) + 1;
-    return dayOfYear;
+// Function to get the current day of the year (1-based)
+function getDayOfYear() {
+    const today = new Date();
+    const startOfYear = new Date(today.getFullYear(), 0, 0);
+    const diff = today - startOfYear;
+    return Math.floor(diff / (1000 * 60 * 60 * 24)); // Difference in days
 }
 
-const todayDayOfYear = getDayOfYear();
-console.log(todayDayOfYear);
-
-function generateReadingPlan() {
-    return fetch('books.json')
-        .then(response => response.json())
-        .then(bibleBooks => {
-            let plan = [];
-            let currentBookIndex = 0;
-            let currentChapter = 1; // Start from Genesis 1
-            let chaptersToday;
-            const day = (todayDayOfYear + 2) % 7;
-            console.log('Day: ', day);
-            console.log('bibleBooks: ', bibleBooks);
-
-            if (day === 0) {
-                chaptersToday = 5;
-            } else {
-                chaptersToday = 3;
-            }
-
-            let dailyReading = [];
-
-            // Gather the chapters for this day
-            for (let i = 0; i < chaptersToday; i++) {
-                // Add the current chapter to the day's reading plan
-                dailyReading.push(`${bibleBooks[currentBookIndex]} ${currentChapter}`);
-
-                // Move to the next chapter
-                currentChapter++;
-
-                // Check if we need to move to the next book
-                if (currentChapter > bibleBooks[currentBookIndex].chapters) {
-                    currentBookIndex++;
-                    currentChapter = 1; // Reset chapter count for the next book
-                }
-            }
-
-            // Add this day's reading to the plan
-            plan.push({
-                day: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][day],
-                reading: dailyReading
-            });
-            return plan;
-	    console.log(plan)
-        })
-        .catch(error => console.error('Error loading Bible data:', error));
+// Function to get the current weekday (0 = Sunday, 6 = Saturday)
+function getWeekday() {
+    const today = new Date();
+    return today.getDay(); // 0 is Sunday, 6 is Saturday
 }
 
-function displayTodayReading(plan) {
-    const currentDay = new Date().getDay();  // Get the current day (0 = Sunday, 1 = Monday, ...)
-    const todayPlan = plan[currentDay]; // Get the reading for today
+// Function to calculate the number of Sundays that have passed up to today
+function getNumSundays(dayOfYear) {
+    return Math.floor(dayOfYear / 7);
+}
 
+// Function to fetch Bible data and calculate readings for the day
+async function getBibleDataAndReadings() {
+    try {
+        // Fetch the Bible data from the JSON file
+        const response = await fetch('bible_with_chapters.json');
+        const bibleData = await response.json();
+        
+        // Get the current day of the year and weekday
+        const dayOfYear = getDayOfYear();
+        const weekday = getWeekday();
+        
+        // Calculate how many Sundays have passed up to today
+        const numSundays = getNumSundays(dayOfYear);
+        
+        // Total chapters read until today:
+        // 3 chapters for Monday through Saturday, 5 chapters for Sunday
+        const chaptersRead = (dayOfYear - numSundays) * 3 + numSundays * 5;
+        
+        // Ensure we don't go out of bounds of the Bible's chapters
+        if (chaptersRead >= bibleData.length) {
+            console.log("All chapters have been read!");
+            return;
+        }
+
+        // How many chapters to read today based on the day of the week
+        let chaptersPerDay = 3;
+        if (weekday === 0) {  // Sunday (0 in JavaScript Date is Sunday)
+            chaptersPerDay = 5;
+        }
+        
+        // Calculate the starting chapter for today based on chapters read so far
+        const startIndex = chaptersRead;
+        
+        // Calculate the end index for today's reading
+        const endIndex = startIndex + chaptersPerDay;
+        
+        // Get the readings for today
+        const readings = bibleData.slice(startIndex, endIndex);
+        
+        // Now display today's reading
+        displayTodayReading(readings);
+    } catch (error) {
+        console.error('Error fetching Bible data:', error);
+    }
+}
+
+// Function to display today's reading plan
+function displayTodayReading(readings) {
     const container = document.getElementById('readingPlan');
     container.innerHTML = ''; // Clear any previous plan
 
     let dayDiv = document.createElement('div');
     dayDiv.classList.add('day-plan');
+    
+    // Get the current day of the week
+    const currentDay = new Date().toLocaleString('en-US', { weekday: 'long' });
+
     let dayHeader = document.createElement('h3');
-    dayHeader.textContent = todayPlan.day;
+    dayHeader.textContent = `Today's Readings: ${currentDay}`;
     dayDiv.appendChild(dayHeader);
 
     let ul = document.createElement('ul');
-    todayPlan.reading.forEach(chapter => {
+    readings.forEach(reading => {
         let li = document.createElement('li');
-        li.textContent = chapter;
+        li.textContent = `${reading.book} ${reading.chapter}`;
         ul.appendChild(li);
     });
 
@@ -106,12 +114,9 @@ function displayTodayReading(plan) {
     container.appendChild(dayDiv);
 }
 
-// Generate the reading plan and display today's reading
-document.addEventListener('DOMContentLoaded', () => {
-    generateReadingPlan().then(plan => {
-        displayTodayReading(plan); // Display only today's reading
-    });
-});
+// Call the function to get and display Bible readings
+getBibleDataAndReadings();
+
 </script>
 </body>
 </html>
