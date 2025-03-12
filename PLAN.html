@@ -82,6 +82,7 @@ async function getBibleDataAndReadings() {
         
         // Get the readings for today
         const readings = bibleData.slice(startIndex, endIndex);
+        console.log("Readings: ", readings);
         
         // Now display today's reading
         displayTodayReading(readings);
@@ -108,7 +109,7 @@ function displayTodayReading(readings) {
     let ul = document.createElement('ul');
     readings.forEach(reading => {
         let li = document.createElement('li');
-        li.textContent = `${reading.book} ${reading.chapter}`;
+        li.textContent = `${reading.book} ${reading.Chapter}`;
         ul.appendChild(li);
     });
 
