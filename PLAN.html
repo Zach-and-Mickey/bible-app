@@ -48,6 +48,7 @@ async function getBibleDataAndReadings() {
         // Fetch the Bible data from the JSON file
         const response = await fetch('books_with_chapters.json');
         const bibleData = await response.json();
+        console.log(bibleData);
         
         // Get the current day of the year and weekday
         const dayOfYear = getDayOfYear();
