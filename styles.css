@@ -178,3 +178,13 @@ p {
     max-width: 300px; /* Optional: restrict max width */
   }
 }
+/* <------------ Reading Plan Styles ---------------> */
+h3 {
+  color: blue;
+  margin: 2vw;
+  font-size: clamp(10px, 3vw, 30px);
+  text-decoration: underline;
+}
+ul {
+  list-style: circle outside;
+}
