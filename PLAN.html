@@ -29,6 +29,7 @@ function getDayOfYear() {
 function getWeekday() {
     const today = new Date();
     return today.getDay(); // 0 is Sunday, 6 is Saturday
+    console.log("Today: ",today);
 }
 
 // Function to calculate the number of Sundays that have passed up to today
@@ -50,6 +51,9 @@ async function getBibleDataAndReadings() {
         
         // Calculate how many Sundays have passed up to today
         const numSundays = getNumSundays(dayOfYear);
+
+        console.log("dayOfYear: ",dayOfYear);
+        console.log("numSundays: ", numSundays);
         
         // Total chapters read until today:
         // 3 chapters for Monday through Saturday, 5 chapters for Sunday
