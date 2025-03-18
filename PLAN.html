@@ -34,7 +34,7 @@ function getWeekday() {
 
 // Function to calculate the number of Sundays that have passed up to today
 function getNumSundays(dayOfYear) {
-    return Math.floor(dayOfYear / 7);
+    return Math.floor((dayOfYear+2)/ 7);
 }
 
 // Function to fetch Bible data and calculate readings for the day
